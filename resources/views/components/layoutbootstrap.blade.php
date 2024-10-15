@@ -10,9 +10,7 @@
     @livewireStyles
 </head>
 <body>
-    <div class="container">
-        {{ $slot }}
-    </div>
+    {{ $slot }}
     @livewireScripts
 </body>
 </html>

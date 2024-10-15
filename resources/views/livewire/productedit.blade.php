@@ -1,25 +1,23 @@
 <div>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Adicionar
+    <button type="button" class="btn btn-warning bi bi-pencil" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     </button>
 
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Novo produto</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar produto</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             <div class="modal-body">
             
-                <form wire:submit="save">
+                <form wire:submit="edit">
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a nova categoria" wire:model="nome">
                     </div>
-                    @error('title') <span>{{ $message }}</span> @enderror
 
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
@@ -51,9 +49,8 @@
                         <input class="form-control" type="file" id="formFile" wire:model="imagem_url">
                     </div>
 
-                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                    <button class="btn btn-primary" type="submit">Editar</button>
                 </form>
-
             </div>
         </div>
     </div>

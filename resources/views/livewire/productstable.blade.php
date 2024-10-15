@@ -22,8 +22,17 @@
                         <td>{{ number_format($product->preco_venda, 2, ',', '.') }}</td>
                         <td>{{ $product->quantidade_estoque }}</td>
                         <td>
-                            <button class="btn btn-warning bi bi-pencil"></button>
-                            <button class="btn btn-danger bi bi-trash"></button>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <button 
+                                    type="button"
+                                    class="btn btn-danger bi bi-trash"
+                                    wire:click="deleteConfirmation({{ $product->id }})"
+                                    wire.confirm="Deseja deletar este produto?"
+                                ></button>
+                                <!-- <button type="button" class="btn btn-warning bi bi-pencil"></button> -->
+                                <livewire:productedit />
+                            </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -36,3 +45,28 @@
         </div>
     @endif
 </div>
+
+@script
+<script>
+    // window.addEventListener('show-delete-confirmation', event => {
+    //     Swal.fire({
+    //         title: "Are you sure?",
+    //         text: "You won't be able to revert this!",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Yes, delete it!"
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             Livewire.emit('deleteConfirmed')
+    //             Swal.fire({
+    //             title: "Deleted!",
+    //             text: "Your file has been deleted.",
+    //             icon: "success"
+    //             });
+    //         }
+    //     });
+    // })
+</script>
+@endscript

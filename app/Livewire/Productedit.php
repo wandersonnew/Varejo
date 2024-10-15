@@ -7,6 +7,37 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Models\Product;
 
+class Productedit extends Component
+{
+    public $categories;
+    public $nome;
+    public $descricao;
+    public $preco_compra;
+    public $preco_venda;
+    public $categoria_id;
+    public $quantidade_estoque = 2;
+    public $imagem_url;
+
+    public function mount()
+    {
+        $this->categories = Category::all();
+    }
+
+    public function render()
+    {
+        return view('livewire.productedit');
+    }
+}
+
+/*
+
+namespace App\Livewire;
+
+use Livewire\Attributes\Validate; 
+use Livewire\Component;
+use App\Models\Category;
+use App\Models\Product;
+
 class Productadd extends Component
 {
     public $categories;
@@ -49,3 +80,4 @@ class Productadd extends Component
         return view('livewire.productadd');
     }
 }
+*/
