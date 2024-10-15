@@ -14,7 +14,7 @@ class SaleEmail extends Model
 
     protected $fillable = [
         "id",
-        "venda_id", // (FK para sales)
+        "venda_id",
         "email_cliente",
         "data_envio"
     ];

@@ -29,8 +29,7 @@
                                     wire:click="deleteConfirmation({{ $product->id }})"
                                     wire.confirm="Deseja deletar este produto?"
                                 ></button>
-                                <!-- <button type="button" class="btn btn-warning bi bi-pencil"></button> -->
-                                <livewire:productedit />
+                                <button type="button" class="btn btn-warning bi bi-pencil"></button>
                             </div>
                             </div>
                         </td>
@@ -38,35 +37,15 @@
                 @endforeach
             </tbody>
         </table>
+
+        {{ $products->links() }}
+
     @else
         <div class="text-center">
             <h4>Não há registro</h4>
             <i class="bi bi-inboxes" style="font-size: 3rem; color: cornflowerblue;"></i>
         </div>
     @endif
-</div>
 
-@script
-<script>
-    // window.addEventListener('show-delete-confirmation', event => {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             Livewire.emit('deleteConfirmed')
-    //             Swal.fire({
-    //             title: "Deleted!",
-    //             text: "Your file has been deleted.",
-    //             icon: "success"
-    //             });
-    //         }
-    //     });
-    // })
-</script>
-@endscript
+ 
+</div>

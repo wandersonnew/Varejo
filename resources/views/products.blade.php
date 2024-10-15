@@ -23,15 +23,11 @@
                         </div>
                     @endif
                 </div>
-            
-                <livewire:productadd />
-        
-                <livewire:productstable />
+
+                <livewire:producta-dd />
+
+                <livewire:product-list />
 
             </div>
         </div>
-    
-
-
-        
 </x-layoutbootstrap>

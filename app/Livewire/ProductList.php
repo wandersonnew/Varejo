@@ -3,16 +3,13 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Product;
 
-class Productstable extends Component
+class ProductList extends Component
 {
-    public $products = '';
-
-    public function mount()
-    {
-        $this->products = Product::all();
-    }
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public function deleteConfirmation(Product $product)
     {
@@ -24,6 +21,8 @@ class Productstable extends Component
 
     public function render()
     {
-        return view('livewire.productstable');
+        return view('livewire.product-list', [
+            'products' => Product::paginate(2),
+        ]);
     }
 }
