@@ -62,28 +62,28 @@ class Productadd extends Component
     {
         $validated = $this->validate();
 
-        // if($this->imagem_url) $this->imagem_url->store(path: 'public/uploads');
+        // if($this->imagem_url)
+        // {
+        //     $this->imagem_url->store(path: 'public/uploads');
+        //     $name = $this->imagem_url->getClientOriginalName();
+        //     $path = $this->imagem_url->storeAs('images', $name, 'public');
+        // }
 
-        $name = $this->imagem_url->getClientOriginalName();
-        $path = $this->imagem_url->storeAs('images', $name, 'public');
+        Product::create(
+            $this->only([
+                'nome',
+                'descricao',
+                'preco_compra',
+                'preco_venda',
+                'categoria_id',
+                'quantidade_estoque',
+                'imagem_url',
+            ])
+        );
 
-        dd($path);
-
-        // Product::create(
-        //     $this->only([
-        //         'nome',
-        //         'descricao',
-        //         'preco_compra',
-        //         'preco_venda',
-        //         'categoria_id',
-        //         'quantidade_estoque',
-        //         'imagem_url' => $path,
-        //     ])
-        // );
-
-        // session()->flash('message', 'Produto cadastrado com sucesso.');
+        session()->flash('message', 'Produto cadastrado com sucesso.');
  
-        // return $this->redirect('/products');
+        return $this->redirect('/products');
 
     }
 
