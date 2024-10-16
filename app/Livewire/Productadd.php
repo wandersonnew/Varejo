@@ -64,9 +64,10 @@ class Productadd extends Component
 
         // if($this->imagem_url)
         // {
-        //     $this->imagem_url->store(path: 'public/uploads');
-        //     $name = $this->imagem_url->getClientOriginalName();
-        //     $path = $this->imagem_url->storeAs('images', $name, 'public');
+        //     $path = $this->imagem_url->store(path: 'public');
+        //     // $name = $this->imagem_url->getClientOriginalName();
+        //     // $path = $this->imagem_url->storeAs('images', $name, 'public');
+        //     dd($path);
         // }
 
         Product::create(

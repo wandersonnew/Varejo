@@ -61,6 +61,12 @@
                         @error('imagem_url') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
+                    <div class="mb-3">
+                        @if ($imagem_url) 
+                            <img src="{{ $imagem_url->temporaryUrl() }}" width="100px">
+                        @endif
+                    </div>
+
                     <button id="send" class="btn btn-primary" type="submit">Cadastrar</button>
                 </form>
 
