@@ -8,6 +8,7 @@
                     <th scope="col">Preço da Compra</th>
                     <th scope="col">Preço da Venda</th>
                     <th scope="col">Qtd. Estoque</th>
+                    <th scope="col">Arquivo</th>
                     <th scope="col">Ação</th>
                 </tr>
             </thead>
@@ -19,6 +20,13 @@
                         <td>{{ number_format($product->preco_compra, 2, ',', '.') }}</td>
                         <td>{{ number_format($product->preco_venda, 2, ',', '.') }}</td>
                         <td>{{ $product->quantidade_estoque }}</td>
+                        <td>
+                            
+                            @if ($product->imagem_url)
+                                {{ $product->imagem_url }}
+                                <img src="{{ Storage::url($product->imagem_url) }}" alt="{{ $product->nome }}">
+                            @endif
+                        </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
 

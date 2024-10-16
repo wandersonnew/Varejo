@@ -27,6 +27,7 @@ class Productadd extends Component
             'descricao' => 'nullable|string|min:3|max:100',
             'preco_compra' => 'required|numeric|min:0',
             'preco_venda' => 'required|numeric|min:0',
+            'quantidade_estoque' => 'required|numeric',
             'categoria_id' => 'required|exists:categories,id',
             'imagem_url' => 'nullable|image|max:2048',
         ];
@@ -50,6 +51,9 @@ class Productadd extends Component
             'preco_venda.numeric' => 'O preço de venda deve ser um número.',
             'preco_venda.min' => 'O preço de venda não pode ser negativo.',
 
+            'quantidade_estoque.required' => 'A quantidade é obrigatória.',
+            'quantidade_estoque.numeric' => 'A quantidade deve ser um número.',
+
             'categoria_id.required' => 'A categoria é obrigatória.',
             'categoria_id.exists' => 'A categoria selecionada é inválida.',
 
@@ -62,25 +66,23 @@ class Productadd extends Component
     {
         $validated = $this->validate();
 
-        // if($this->imagem_url)
-        // {
-        //     $path = $this->imagem_url->store(path: 'public');
-        //     // $name = $this->imagem_url->getClientOriginalName();
-        //     // $path = $this->imagem_url->storeAs('images', $name, 'public');
-        //     dd($path);
-        // }
+        if($this->imagem_url)
+        {
+            $path = $this->imagem_url->store(path: 'public');
+            // $name = $this->imagem_url->getClientOriginalName();
+            // $path = $this->imagem_url->storeAs('images', $name, 'public');
+        }
+        else $path = '';
 
-        Product::create(
-            $this->only([
-                'nome',
-                'descricao',
-                'preco_compra',
-                'preco_venda',
-                'categoria_id',
-                'quantidade_estoque',
-                'imagem_url',
-            ])
-        );
+        Product::create([
+            'nome' => $validated['nome'],
+            'descricao' => $validated['descricao'],
+            'preco_compra' => $validated['preco_compra'],
+            'preco_venda' => $validated['preco_venda'],
+            'categoria_id' => $validated['categoria_id'],
+            'quantidade_estoque' => $validated['quantidade_estoque'],
+            'imagem_url' => $path,
+        ]);
 
         session()->flash('message', 'Produto cadastrado com sucesso.');
  

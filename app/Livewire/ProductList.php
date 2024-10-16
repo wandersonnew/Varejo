@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Product;
+use Storage;
 
 class ProductList extends Component
 {
@@ -13,7 +14,10 @@ class ProductList extends Component
 
     public function deleteConfirmation(Product $product)
     {
-        // $this->dispatch('show-delete-confirmation', ['productId' => $id]);
+        if(Storage::fileExists($product->imagem_url))
+            Storage::delete($product->imagem_url);
+        // $folder = Storage::files('livewire-tmp');
+        
         $product->delete();
         session()->flash('message','Produto deletado com sucesso!');
         return redirect()->route('products.index');
