@@ -39,6 +39,12 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Quantidade a ser adicionada</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="R$ 00,00" wire:model="quantidade_estoque">
+                        @error('quantidade_estoque') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="categoria_id" class="form-label">Categoria</label>
                         <select class="form-select" id="categoria_id" aria-label="Selecione uma categoria" wire:model="categoria_id">
                             <option value="" selected>Selecione uma categoria</option>
@@ -51,7 +57,8 @@
 
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Imagem</label>
-                        <input class="form-control" type="file" id="formFile" wire:model="imagem_url">
+                        <input accept="image/png, image/jpeg, image/jpg" class="form-control" type="file" id="formFile" wire:model="imagem_url">
+                        @error('imagem_url') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <button id="send" class="btn btn-primary" type="submit">Cadastrar</button>

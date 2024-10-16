@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate; 
 use Livewire\Component;
 use App\Models\Category;
@@ -9,6 +10,8 @@ use App\Models\Product;
 
 class Productadd extends Component
 {
+    use WithFileUploads;
+
     public $nome
     ,$descricao
     ,$preco_compra
@@ -59,27 +62,34 @@ class Productadd extends Component
     {
         $validated = $this->validate();
 
-        Product::create(
-            $this->only([
-                'nome',
-                'descricao',
-                'preco_compra',
-                'preco_venda',
-                'categoria_id',
-                'quantidade_estoque',
-                'imagem_url'
-            ])
-        );
+        // if($this->imagem_url) $this->imagem_url->store(path: 'public/uploads');
 
-        session()->flash('message', 'Produto cadastrado com sucesso.');
+        $name = $this->imagem_url->getClientOriginalName();
+        $path = $this->imagem_url->storeAs('images', $name, 'public');
+
+        dd($path);
+
+        // Product::create(
+        //     $this->only([
+        //         'nome',
+        //         'descricao',
+        //         'preco_compra',
+        //         'preco_venda',
+        //         'categoria_id',
+        //         'quantidade_estoque',
+        //         'imagem_url' => $path,
+        //     ])
+        // );
+
+        // session()->flash('message', 'Produto cadastrado com sucesso.');
  
-        return $this->redirect('/products');
+        // return $this->redirect('/products');
 
     }
 
     public function render()
     {
-        return view('livewire.productadd', [
+        return view('livewire.product-add', [
             'categories'=> Category::all(),
         ]);
     }
