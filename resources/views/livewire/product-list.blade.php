@@ -23,8 +23,7 @@
                         <td>
                             
                             @if ($product->imagem_url)
-                                {{ $product->imagem_url }}
-                                <img src="{{ Storage::url($product->imagem_url) }}" alt="{{ $product->nome }}">
+                                <img src="{{ Storage::disk('public')->getVisibility($product->imagem_url) }}" alt="{{ $product->nome }}">
                             @endif
                         </td>
                         <td>

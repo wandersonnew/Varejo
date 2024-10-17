@@ -16,7 +16,6 @@ class ProductList extends Component
     {
         if(Storage::fileExists($product->imagem_url))
             Storage::delete($product->imagem_url);
-        // $folder = Storage::files('livewire-tmp');
         
         $product->delete();
         session()->flash('message','Produto deletado com sucesso!');

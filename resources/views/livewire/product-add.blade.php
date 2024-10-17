@@ -75,11 +75,3 @@
     </div>
 
 </div>
-
-@script
-<script>
-    // document.getElementById("send").addEventListener("click", function(event){
-    //     event.preventDefault()
-    // });
-</script>
-@endscript
