@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Mail\SendMail;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate; 
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Product;
+use Mail;
 
 class Productadd extends Component
 {
@@ -83,6 +85,9 @@ class Productadd extends Component
             'quantidade_estoque' => $validated['quantidade_estoque'],
             'imagem_url' => $path,
         ]);
+
+        // Send Email
+        Mail::to('wandersondrtlvs.new@gmail.com')->send(new SendMail());
 
         session()->flash('message', 'Produto cadastrado com sucesso.');
  
