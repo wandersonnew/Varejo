@@ -13,6 +13,18 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
+        $specificCategories = [
+            ['name' => 'Eletrônicos'],
+            ['name' => 'Roupas'],
+            ['name' => 'Alimentos'],
+            ['name' => 'Livros'],
+            ['name' => 'Móveis']
+        ];
+
+        foreach ($specificCategories as $category) {
+            Category::create($category);
+        }
+
         Category::factory()->count(10)->create();
     }
 }

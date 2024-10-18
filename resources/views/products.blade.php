@@ -21,9 +21,7 @@
                         @endif
                     </div>
 
-                    <livewire:product-add />
-
-                    <livewire:product-list />
+                    <livewire:products />
                 </div>
             </div>
         </div>

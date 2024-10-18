@@ -3,8 +3,10 @@
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
+Route::view('/products', 'products');
+
 // Route for products
-Route::resource('products', ProductController::class);
+// Route::resource('products', ProductController::class);
 
 Route::view('/', 'welcome');
 

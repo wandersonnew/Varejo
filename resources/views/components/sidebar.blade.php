@@ -31,7 +31,10 @@
                     <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
                     <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                     <li class="w-100">
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Product</span> 1</a>
+                        <a href="{{ url('products') }}" class="nav-link px-0 text-white">Produtos</a>
+                    </li>
+                    <li class="w-100">
+                        <a href="#" class="nav-link px-0 text-white">Buscar Produto</a>
                     </li>
                 </ul>
             </li>
