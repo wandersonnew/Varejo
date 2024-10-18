@@ -17,7 +17,7 @@ class Productadd extends Component
     ,$preco_compra
     ,$preco_venda
     ,$categoria_id
-    ,$quantidade_estoque = 2
+    ,$quantidade_estoque
     ,$imagem_url;
 
     public function rules()

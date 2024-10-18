@@ -33,15 +33,6 @@
                     <li class="w-100">
                         <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Product</span> 1</a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Product</span> 2</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Product</span> 3</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Product</span> 4</a>
-                    </li>
                 </ul>
             </li>
         </ul>
