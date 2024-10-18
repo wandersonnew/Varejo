@@ -9,6 +9,8 @@ Route::view('/products/search','products-search');
 Route::view('/customers','customers-register');
 Route::view('/customers/search','customers-search');
 
+Route::view('/sales','sales');
+
 // Route for products
 // Route::resource('products', ProductController::class);
 

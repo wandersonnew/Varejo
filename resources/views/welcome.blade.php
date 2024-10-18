@@ -3,15 +3,7 @@
         Sistema de Varejo
     </x-slot>
 
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            @if (Route::has('login'))
-                <div class="ms-auto">
-                    <livewire:welcome.navigation />
-                </div>
-            @endif
-        </div>
-    </nav>
+    
 
     <div class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 56px);">
         <h1 style="color: white; font-size: 50px; text-shadow: 

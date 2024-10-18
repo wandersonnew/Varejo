@@ -23,6 +23,19 @@
     @livewireStyles
 </head>
 <body>
+
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="navbar-brand">{{ $navtitle ?? '' }}</div>
+            @if (Route::has('login'))
+                <div class="ms-auto">
+                    <livewire:welcome.navigation />
+                </div>
+            @endif
+        </div>
+    </nav>    
+
+
     {{ $slot }}
     @livewireScripts
 </body>

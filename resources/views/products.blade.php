@@ -2,6 +2,9 @@
     <x-slot:title>
         Produtos
     </x-slot>
+    <x-slot:navtitle>
+        Produtos
+    </x-slot>
 
         <div class="container-fluid">
             <div class="row flex-nowrap">
@@ -9,8 +12,6 @@
                 <x-sidebar />
 
                 <div class="col py-3">
-                    <h1 class="text-center">Produtos</h1>
-                    <hr>
         
                     <div>
                         @if (session()->has('message'))

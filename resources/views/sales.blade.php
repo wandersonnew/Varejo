@@ -1,9 +1,9 @@
 <x-layoutbootstrap>
     <x-slot:title>
-        Clientes
+        Vendas
     </x-slot>
     <x-slot:navtitle>
-        Clientes
+        Vendas
     </x-slot>
 
         <div class="container-fluid">
@@ -20,8 +20,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
-
                     </div>
+
+                    
                 </div>
             </div>
         </div>
