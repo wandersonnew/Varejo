@@ -4,6 +4,10 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/products', 'products');
+Route::view('/products/search','products-search');
+
+Route::view('/customers','customers-register');
+Route::view('/customers/search','customers-search');
 
 // Route for products
 // Route::resource('products', ProductController::class);

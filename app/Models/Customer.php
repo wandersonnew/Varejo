@@ -17,7 +17,7 @@ class Customer extends Model
         "nome",
         "cpf",
         "telefone",
-        // "email"
+        "email",
     ];
 
     public function sales()
