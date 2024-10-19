@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Customer;
 use Livewire\WithPagination;
+use App\Jobs\SendSaleEmail;
 
 class Customers extends Component
 {
@@ -18,7 +19,7 @@ class Customers extends Component
     {
         return [
             'nome' => 'required|string|min:3|max:50',
-            'email' => 'nullable|string|min:13|max:25',
+            'email' => 'nullable|string|min:13|max:225',
             'telefone' => 'required|string|min:11|max:15',
             'cpf' => 'required|digits:11',
         ];
@@ -62,12 +63,14 @@ class Customers extends Component
     
             session()->flash('message', 'Cliente atualizado com sucesso.');
         } else {
-            Customer::create([
+            $customer = Customer::create([
                 'nome' => $validated['nome'],
                 'email' => $validated['email'],
                 'telefone' => $validated['telefone'],
                 'cpf' => $validated['cpf'],
             ]);
+
+            SendSaleEmail::dispatch($customer);
     
             session()->flash('message', 'Cliente criado com sucesso.');
         }

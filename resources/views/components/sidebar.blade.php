@@ -15,10 +15,7 @@
                     <i class="fs-4 bi bi-person-vcard"></i> <span class="ms-1 d-none d-sm-inline">Clientes</span> </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                     <li class="w-100">
-                        <a href="{{ url('/customers') }}" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Cadastrar cliente</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/customers/search') }}" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Buscar cliente</a>
+                        <a href="{{ url('/customers') }}" class="nav-link px-0 text-white">Cadastrar cliente</a>
                     </li>
                 </ul>
             </li>
@@ -26,12 +23,9 @@
             <li>
                 <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle  text-white">
                     <i class="fs-4 bi bi-table"></i> <span class="ms-1 d-none d-sm-inline">Vendas</span> </a>
-                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                    <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                     <li class="w-100">
-                        <a href="{{ url('/sales') }}" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Efetuar venda</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Buscar cliente</a>
+                        <a href="{{ url('/sales') }}" class="nav-link px-0 text-white">Efetuar venda</a>
                     </li>
                 </ul>
             </li>
@@ -41,9 +35,6 @@
                     <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                     <li class="w-100">
                         <a href="{{ url('products') }}" class="nav-link px-0 text-white">Produtos</a>
-                    </li>
-                    <li class="w-100">
-                        <a href="{{ url('/products/search') }}" class="nav-link px-0 text-white">Buscar Produto</a>
                     </li>
                 </ul>
             </li>

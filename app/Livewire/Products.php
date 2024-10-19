@@ -128,6 +128,8 @@ class Products extends Component
                 'imagem_url' => $path,
             ]);
 
+            // Mail::to('wandersondrtlvs.new@gmail.com')->send(new SendMail());
+
             session()->flash('message', 'Produto cadastrado com sucesso.');
         }
 

@@ -43,9 +43,11 @@
         </table>
 
     @else
-        <div class="text-center">
-            <h4>Não há registro</h4>
-            <i class="bi bi-inboxes" style="font-size: 3rem; color: cornflowerblue;"></i>
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="card-title">Não há registro</h4>
+                <i class="bi bi-inboxes" style="font-size: 3rem; color: cornflowerblue;"></i>
+            </div>
         </div>
     @endif
 

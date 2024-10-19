@@ -30,7 +30,7 @@
                         <td>
                             
                             @if ($product->imagem_url)
-                                <img src="{{ Storage::url($product->imagem_url) }}" alt="{{ $product->nome }}" style="height: 100px; width: auto;">
+                                <img src="{{ Storage::url($product->imagem_url) }}" alt="{{ $product->nome }}" style="height: 80px; width: auto;">
                             @endif
                         </td>
                         <td>
@@ -55,9 +55,11 @@
         {{ $products->links() }}
 
     @else
-        <div class="text-center">
-            <h4>Não há registro</h4>
-            <i class="bi bi-inboxes" style="font-size: 3rem; color: cornflowerblue;"></i>
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="card-title">Não há registro</h4>
+                <i class="bi bi-inboxes" style="font-size: 3rem; color: cornflowerblue;"></i>
+            </div>
         </div>
     @endif
 
@@ -97,7 +99,7 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Quantidade a ser adicionada</label>
-                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="R$ 00,00" wire:model="quantidade_estoque">
+                        <input type="number" class="form-control" id="exampleFormControlInput1" wire:model="quantidade_estoque">
                         @error('quantidade_estoque') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 

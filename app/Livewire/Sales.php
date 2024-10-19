@@ -6,9 +6,11 @@ use App\Models\Sale;
 use Livewire\Component;
 use Mail;
 use App\Mail\SendMail;
+use App\Models\Product;
 
 class Sales extends Component
 {
+    public $searchvalue;
 
     public $saleId
         ,$cliente_id
@@ -54,6 +56,15 @@ class Sales extends Component
         ];
     }
 
+    public function search()
+    {
+        $validated = $this->validate([ 
+            'searchvalue' => 'required|min:3',
+        ]);
+
+        dd($validated['searchvalue']);
+    }
+
     public function save()
     {
         $validated = $this->validate();
@@ -77,6 +88,8 @@ class Sales extends Component
 
     public function render()
     {
-        return view('livewire.sales');
+        return view('livewire.sales', [
+            'products' => Product::paginate(10),
+        ]);
     }
 }

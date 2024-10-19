@@ -22,6 +22,7 @@
                         @endif
                     </div>
 
+                    <livewire:sales />
                     
                 </div>
             </div>
