@@ -70,7 +70,7 @@ class Customers extends Component
                 'cpf' => $validated['cpf'],
             ]);
 
-            SendSaleEmail::dispatch($customer);
+            // SendSaleEmail::dispatch($customer);
     
             session()->flash('message', 'Cliente criado com sucesso.');
         }

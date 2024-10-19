@@ -27,7 +27,7 @@
                         <p class="card-text"><small class="text-body-secondary">R$ {{ $product->preco_venda }}</small></p>
                     </div>
                     <div class="card-footer text-center text-body-secondary">
-                        <button class="btn btn-secondary" wire:click="{{ $product->id }}">Adicionar ao carrinho</button>
+                        <button class="btn btn-secondary" wire:click="addToCart({{ $product->id }})">Adicionar ao carrinho</button>
                     </div>
                 </div>
 

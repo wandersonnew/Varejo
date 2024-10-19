@@ -12,6 +12,8 @@ class Sales extends Component
 {
     public $searchvalue;
 
+    public $itens = [];
+
     public $saleId
         ,$cliente_id
         ,$data_venda
@@ -62,7 +64,20 @@ class Sales extends Component
             'searchvalue' => 'required|min:3',
         ]);
 
-        dd($validated['searchvalue']);
+        $this->searchvalue = $validated['searchvalue'];
+    }
+
+    public function addToCart($id)
+    {
+        $this->itens = session()->get('itens', []);
+
+        $this->itens[] = $id;
+
+        session()->put('itens', $this->itens);
+
+        session()->flash('message', 'Produto adicionado ao carrinho.');
+
+        return $this->redirect('/sales');
     }
 
     public function save()
@@ -88,8 +103,12 @@ class Sales extends Component
 
     public function render()
     {
+        $products = Product::where('nome', 'like', "%{$this->searchvalue}%")
+            ->orWhere("descricao","like", "%{$this->searchvalue}%")
+            ->paginate(10);
+
         return view('livewire.sales', [
-            'products' => Product::paginate(10),
+            'products' => $products,
         ]);
     }
 }
