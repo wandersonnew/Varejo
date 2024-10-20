@@ -2,17 +2,21 @@
 
 namespace App\Livewire;
 
+use App\Models\Discount;
 use App\Models\Sale;
+use App\Models\SaleEmail;
+use App\Models\SaleItem;
 use Livewire\Component;
 use Mail;
 use App\Mail\SendMail;
 use App\Models\Product;
+use App\Models\Customer;
 
 class Sales extends Component
 {
     public $searchvalue;
 
-    public $itens = [];
+    public $cartItems = [];
 
     public $saleId
         ,$cliente_id
@@ -21,6 +25,8 @@ class Sales extends Component
         ,$cupom_desconto
         ,$total_final
         ,$status;
+
+    public $customer, $cpf;
 
     public function rules()
     {
@@ -66,49 +72,108 @@ class Sales extends Component
 
         $this->searchvalue = $validated['searchvalue'];
     }
-
-    public function addToCart($id)
+    public function addToCart($cart)
     {
-        $this->itens = session()->get('itens', []);
+        $productIds = array_map(function($item) {
+            return $item['id'];
+        }, $cart);
 
-        $this->itens[] = $id;
+        $products = Product::whereIn('id', $productIds)->get();
 
-        session()->put('itens', $this->itens);
+        $total = 0;
 
-        session()->flash('message', 'Produto adicionado ao carrinho.');
+        foreach ($products as $product) {
+            foreach ($cart as $item) {
+                if ($item['id'] == $product->id) {
+                    $product->quantidade = $item['quantidade'];
+                    $total += $product->preco_venda * $product->quantidade;
+                }
+            }
+        }
 
-        return $this->redirect('/sales');
+        $this->cartItems = $products;
+        $this->total_venda = $total;
     }
 
-    public function save()
+    public function searchCustomer()
     {
-        $validated = $this->validate();
-
-        Sale::create([
-            'cliente_id' => $validated['cliente_id'],
-            'data_venda'=> $validated['data_venda'],
-            'total_venda'=> $validated['total_venda'],
-            'cupom_desconto'=> $validated['cupom_desconto'],
-            'total_final'=> $validated['total_final'],
-            'status'=> $validated['status'],
+        $validated = $this->validate([
+            'cpf' => 'required|digits:11',
         ]);
 
-        Mail::to("wandersondrtlvs.new@gmail.com")->send(new SendMail() );
+        $this->cpf = $validated['cpf']; 
+    }
 
-        session()->flash('message', 'Venda cadastrado com sucesso.');
+    public function finishSale($vendaInfo)
+    {
+        $productIds = array_map(function($item) {
+            return $item['id'];
+        }, $vendaInfo['cart']);
 
+        $products = Product::whereIn('id', $productIds)->get();
+
+        $desconto = Discount::where('codigo', $vendaInfo['desconto'])->first();
+
+        $calculoDisconto = $vendaInfo['totalVenda'] - ($vendaInfo['totalVenda'] * ($desconto->percentual / 100));
+
+
+
+        $sale = Sale::create([
+            'cliente_id' => $this->customer->id,
+            'data_venda' => now(),
+            'total_venda' => $vendaInfo['totalVenda'],
+            'cupom_desconto' => $vendaInfo['desconto'], 
+            'total_final' => $calculoDisconto,
+            'status' => 'Pago',
+        ]);
+
+        
+
+        foreach ($vendaInfo['cart'] as $cartItem) {
+            $product = $products->where('id', $cartItem['id'])->first();
+    
+            if ($product) {
+                $subtotal = $product->preco_venda * $cartItem['quantidade'];
+    
+                SaleItem::create([
+                    'venda_id' => $sale->id,
+                    'produto_id' => $product->id,
+                    'quantidade' => $cartItem['quantidade'],
+                    'preco_unitario' => $product->preco_venda,
+                    'subtotal' => $subtotal,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+
+        $saleEmail = SaleEmail::create([
+            'venda_id' => $sale->id,
+            'email_cliente' => now(),
+            'data_envio' => now(),
+        ]);
+
+        if ($saleEmail) 
+        {
+            Mail::to($this->customer->email)->send(new SendMail());
+            session()->flash('message', 'Venda cadastrado com sucesso.');
+        } else session()->flash('message', 'Erro ao efetuar venda.');
         return $this->redirect('/sales');
 
     }
 
     public function render()
     {
+
         $products = Product::where('nome', 'like', "%{$this->searchvalue}%")
             ->orWhere("descricao","like", "%{$this->searchvalue}%")
             ->paginate(10);
 
+        $this->customer = Customer::where('cpf', $this->cpf)->first();
+
         return view('livewire.sales', [
             'products' => $products,
+            'customer' => $this->customer,
         ]);
     }
 }

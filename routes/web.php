@@ -3,14 +3,11 @@
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/products', 'products')->name('products');
-
-Route::view('/customers','customers-register');
-
-Route::view('/sales','sales');
-
-// Route for products
-// Route::resource('products', ProductController::class);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::view('/products', 'products')->name('products');
+    Route::view('/customers', 'customers-register');
+    Route::view('/sales', 'sales')->name('sales');
+});
 
 Route::view('/', 'welcome');
 

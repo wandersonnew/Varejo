@@ -18,7 +18,7 @@ return new class extends Migration
               ->onDelete('cascade');
             $table->dateTime('data_venda');
             $table->decimal('total_venda', 10, 2);
-            $table->foreignId('cupom_desconto')->nullable()
+            $table->string('cupom_desconto')->nullable()
                 ->constrained('discounts')
                 ->onDelete('set null');
             $table->decimal('total_final', 10, 2);
