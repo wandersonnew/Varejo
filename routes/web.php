@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,12 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+
+// API Routes
+Route::middleware('api')->group(function () {
+    Route::get('/api/orderitens/{saleid}', [CustomerController::class,'checkOrderItems'])->name('checkorderitens');
+});
+    
 
 require __DIR__.'/auth.php';

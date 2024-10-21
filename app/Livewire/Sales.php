@@ -11,6 +11,7 @@ use Mail;
 use App\Mail\SendMail;
 use App\Models\Product;
 use App\Models\Customer;
+use App\Jobs\SendSaleEmail;
 
 class Sales extends Component
 {
@@ -114,7 +115,8 @@ class Sales extends Component
 
         $desconto = Discount::where('codigo', $vendaInfo['desconto'])->first();
 
-        $calculoDisconto = $vendaInfo['totalVenda'] - ($vendaInfo['totalVenda'] * ($desconto->percentual / 100));
+        if($desconto) $calculoDisconto = $vendaInfo['totalVenda'] - ($vendaInfo['totalVenda'] * ($desconto->percentual / 100));
+        else $calculoDisconto = $vendaInfo['totalVenda'];
 
 
 
@@ -155,7 +157,20 @@ class Sales extends Component
 
         if ($saleEmail) 
         {
-            Mail::to($this->customer->email)->send(new SendMail());
+            $host = config('custom.host');
+            $port = config('custom.port');
+            $url = $host . ':' . $port . '?id=' . $sale->id;
+            $orderDetails = [
+                'sale' => $sale,
+                'link' => $url,
+            ];
+
+            // Mail::to($this->customer->email)->queue(new SendMail());
+            SendSaleEmail::dispatch($this->customer, $orderDetails);
+            // Mail::to($this->customer->email)->queue(new SendMail($this->customer, $orderDetails));
+            // Mail::to($this->customer->email)->send(new SendMail($this->customer, $orderDetails));
+
+
             session()->flash('message', 'Venda cadastrado com sucesso.');
         } else session()->flash('message', 'Erro ao efetuar venda.');
         return $this->redirect('/sales');

@@ -1,3 +1,5 @@
 <div>
-    <h1>Olá Wanderson, seja bem vindo!</h1>
+    <h1>Olá {{ $customer['nome'] }}</h1>
+
+    Segue o link para acompanhamento de seu pedido: <a href="{{ $orderDetails['link'] }}">ITENS DO PEDIDO</a>.
 </div>

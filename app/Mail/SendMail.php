@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Customer;
 
 class SendMail extends Mailable
 {
@@ -16,9 +17,16 @@ class SendMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public Customer $customer;
+    public $orderDetails;
+
+    public function __construct(
+        Customer $customer
+        , $orderDetails
+    )
     {
-        //
+        $this->customer = $customer;
+        $this->orderDetails = $orderDetails;
     }
 
     /**
@@ -38,6 +46,10 @@ class SendMail extends Mailable
     {
         return new Content(
             view: 'emails.send-mail',
+            with: [
+                'customer' => $this->customer,
+                'orderDetails' => $this->orderDetails
+            ],
         );
     }
 

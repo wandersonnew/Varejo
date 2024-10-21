@@ -15,9 +15,15 @@ class SendSaleEmail implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public Customer $customer)
+    public Customer $customer;
+    public $orderDetails;
+    public function __construct(
+        Customer $customer
+        , $orderDetails
+    )
     {
-        //
+        $this->customer = $customer;
+        $this->orderDetails = $orderDetails;
     }
 
     /**
@@ -25,6 +31,11 @@ class SendSaleEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->customer->email)->send(new SendMail());
+        \Log::info('Enviando email para: ' . $this->customer->email);
+        \Log::info('Detalhes do pedido: ', (array)$this->orderDetails);
+        Mail::to($this->customer->email)->send(new SendMail(
+            $this->customer
+            , $this->orderDetails
+        ));
     }
 }
